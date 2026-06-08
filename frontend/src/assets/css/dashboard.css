@@ -1,0 +1,101 @@
+:root {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --secondary: #2c3e50;
+  --light-bg: #f8f9fa;
+  --card-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+  --text-dark: #2c3e50;
+  --text-light: #666;
+}
+
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--light-bg);
+}
+
+/* Main Layout */
+.d-flex {
+  display: flex;
+}
+
+.flex-grow-1 {
+  flex: 1;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.bg-light {
+  background-color: var(--light-bg) !important;
+}
+
+/* Cards */
+.dashboard-card {
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: white;
+  border-left: 4px solid var(--primary);
+  box-shadow: var(--card-shadow);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.dashboard-card .card-body {
+  padding: 25px;
+}
+
+.dashboard-card h5 {
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+/* Responsive */
+.row.g-4 {
+  gap: 2rem;
+}
+
+.col-md-4 {
+  margin-bottom: 0;
+}
+
+/* Padding utilities */
+.p-4 {
+  padding: 2rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.shadow {
+  box-shadow: var(--card-shadow);
+}
