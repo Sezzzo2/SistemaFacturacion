@@ -4,6 +4,7 @@ import Login from "../pages/Login/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Clientes from "../pages/Clientes/Clientes";
+import Facturas from "../pages/Facturas/Facturas";
 
 function AppRoutes() {
   const token = localStorage.getItem("token");
@@ -32,6 +33,7 @@ function AppRoutes() {
             </PrivateRoute>
           }
         />
+        <Route path="/facturas" element={<Facturas />} />
       </Routes>
     </BrowserRouter>
   );

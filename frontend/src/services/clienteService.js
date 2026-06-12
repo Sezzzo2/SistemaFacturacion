@@ -12,6 +12,7 @@ export const buscarClientes = async (texto) => {
   return response.data;
 };
 
+
 export const crearCliente = async (clienteData) => {
   const response = await api.post("/clientes", clienteData);
 
@@ -29,4 +30,8 @@ export const desactivarCliente = async (id) => {
 
   return response.data;
 };
+export const buscarClienteFactura = async (texto) => {
+  const response = await api.get(`/clientes/buscar?texto=${texto}`);
 
+  return response.data;
+};

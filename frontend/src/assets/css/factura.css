@@ -1,0 +1,117 @@
+.formulario-card{
+
+    border-radius:15px;
+
+}
+
+.preview-card{
+
+    border-radius:15px;
+
+    background:white;
+
+    min-height:900px;
+
+    padding:40px;
+
+}
+
+.titulo-factura{
+
+    color:#b30000;
+
+    font-weight:bold;
+
+}
+
+.logo-preview{
+
+    width:140px;
+
+}
+
+.linea{
+
+    border-bottom:1px solid #ddd;
+
+    margin-top:8px;
+
+    margin-bottom:8px;
+
+}
+
+.categoria-box{
+
+    border:1px solid #ccc;
+
+    padding:5px;
+
+    margin-bottom:5px;
+
+}
+
+.total-box{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#b30000;
+
+}
+.preview-card{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    min-height:900px;
+
+}
+
+.logo-preview{
+
+    width:160px;
+
+}
+
+.titulo-factura{
+
+    color:#b30000;
+
+    font-weight:bold;
+
+}
+
+.table th{
+
+    background:#f8f9fa;
+
+}
+
+.table td{
+
+    vertical-align:middle;
+
+}
+
+/* Estilos para categorías múltiples */
+.categorias-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.categoria-badge {
+    display: inline-block;
+    background-color: #b30000;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}

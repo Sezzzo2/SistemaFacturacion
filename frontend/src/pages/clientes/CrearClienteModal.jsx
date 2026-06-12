@@ -24,14 +24,19 @@ function CrearClienteModal({ mostrar, onClose, onCrear }) {
     setError("");
 
     try {
-      await crearCliente(formData);
+      const nuevoCliente = await crearCliente(formData);
+
       setFormData({
         identificacion: "",
         nombre: "",
         apellido: "",
         telefono: "",
       });
-      onCrear();
+
+      if (onCrear) {
+        onCrear(nuevoCliente);
+      }
+
       onClose();
     } catch (error) {
       console.error("Error al crear cliente:", error);

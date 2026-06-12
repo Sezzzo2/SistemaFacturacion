@@ -42,11 +42,16 @@ function Dashboard() {
         </div>
 
         <div className="col-md-4">
-          <div className="card dashboard-card shadow">
-            <div className="card-body">
-              <h5>Facturas</h5>
+          <div
+            className="card dashboard-card shadow h-100"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/facturas")}
+          >
+            <div className="card-body text-center">
 
-              <div className="dashboard-number">0</div>
+              <h5 className="mt-3">Nueva Factura</h5>
+
+              <p className="text-muted">Crear una nueva factura</p>
             </div>
           </div>
         </div>
