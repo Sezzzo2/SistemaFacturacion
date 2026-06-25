@@ -53,7 +53,7 @@ const crearFactura = async (req, res) => {
     if (!clienteId) {
       const clienteExistente = await pool.query(
         "SELECT id_cliente FROM cliente WHERE identificacion = $1 AND estado = true",
-        [identificacion]
+        [identificacion],
       );
 
       if (clienteExistente.rows.length > 0) {
@@ -64,20 +64,19 @@ const crearFactura = async (req, res) => {
           `INSERT INTO cliente (identificacion, nombre, apellido, telefono, estado)
            VALUES ($1, $2, $3, $4, true)
            RETURNING id_cliente`,
-          [identificacion, nombre, apellido, telefono]
+          [identificacion, nombre, apellido, telefono],
         );
 
         clienteId = resultadoCliente.rows[0].id_cliente;
       }
     }
 
-    // Generar número de factura auto-incremental
-    const resultadoMaximo = await pool.query(
-      "SELECT MAX(numero_factura) as max_numero FROM factura"
-    );
+    // Obtener siguiente número desde la secuencia
+    const resultadoSecuencia = await pool.query(`
+      SELECT nextval('factura_numero_factura_seq') AS numero_factura
+    `);
 
-    const maxNumero = resultadoMaximo.rows[0].max_numero || 0;
-    const nuevoNumeroFactura = maxNumero + 1;
+    const nuevoNumeroFactura = resultadoSecuencia.rows[0].numero_factura;
 
     // Crear factura con el número generado automáticamente
     const factura = await facturaModel.crear({
@@ -121,7 +120,9 @@ const obtenerFacturas = async (req, res) => {
     const facturasConCategorias = facturas.map((factura) => ({
       ...factura,
       categoria_aviso: factura.categoria_aviso
-        ? (typeof factura.categoria_aviso === 'string' ? JSON.parse(factura.categoria_aviso) : factura.categoria_aviso)
+        ? typeof factura.categoria_aviso === "string"
+          ? JSON.parse(factura.categoria_aviso)
+          : factura.categoria_aviso
         : [],
     }));
 
@@ -144,7 +145,9 @@ const obtenerFacturasPorCliente = async (req, res) => {
     const facturasConCategorias = facturas.map((factura) => ({
       ...factura,
       categoria_aviso: factura.categoria_aviso
-        ? (typeof factura.categoria_aviso === 'string' ? JSON.parse(factura.categoria_aviso) : factura.categoria_aviso)
+        ? typeof factura.categoria_aviso === "string"
+          ? JSON.parse(factura.categoria_aviso)
+          : factura.categoria_aviso
         : [],
     }));
 
@@ -157,8 +160,26 @@ const obtenerFacturasPorCliente = async (req, res) => {
   }
 };
 
+const obtenerSiguienteNumeroFactura = async (req, res) => {
+  try {
+    const resultado = await pool.query(`
+      SELECT COALESCE(MAX(numero_factura), 45000) + 1 AS numero_factura
+      FROM factura
+    `);
+
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      mensaje: "Error obteniendo consecutivo",
+    });
+  }
+};
+
 module.exports = {
   crearFactura,
   obtenerFacturas,
   obtenerFacturasPorCliente,
+  obtenerSiguienteNumeroFactura,
 };
