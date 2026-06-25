@@ -10,38 +10,37 @@ const CATEGORIAS = [
   "EDICTO DE NOTARIA",
   "EDICTO DE JUZGADO",
   "REMATE",
-  "COORMACARENA",
-  "CURADURÍA"
+  "CORMACARENA",
+  "CURADURÍA",
 ];
 
-function FormularioFactura({ factura, setFactura }) {
-  const [cargando, setCargando] = useState(false);
-  const [mensaje, setMensaje] = useState("");
-
+function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
   const cambiarValor = (e) => {
     setFactura({
       ...factura,
       [e.target.name]: e.target.value,
     });
   };
+  const [cargando, setCargando] = useState(false);
+  const [mensaje, setMensaje] = useState("");
 
   const manejarCategorias = (categoria) => {
     setFactura({
       ...factura,
       categorias: factura.categorias.includes(categoria)
-        ? factura.categorias.filter(cat => cat !== categoria)
-        : [...factura.categorias, categoria]
+        ? factura.categorias.filter((cat) => cat !== categoria)
+        : [...factura.categorias, categoria],
     });
   };
 
   // Convertir fechaRecibido a formato legible
   const formatearFecha = (fecha) => {
-    const date = new Date(fecha + 'T00:00:00');
-    return date.toLocaleDateString('es-CO', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    const date = new Date(fecha + "T00:00:00");
+    return date.toLocaleDateString("es-CO", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -49,17 +48,43 @@ function FormularioFactura({ factura, setFactura }) {
   const obtenerFechaColombiana = () => {
     const ahora = new Date();
     // Crear fecha en zona horaria de Colombia (UTC-5)
-    const formatter = new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'America/Bogota',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
+    const formatter = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Bogota",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
     });
     const partes = formatter.formatToParts(ahora);
-    const fecha = `${partes.find(p => p.type === 'year').value}-${partes.find(p => p.type === 'month').value}-${partes.find(p => p.type === 'day').value}`;
+    const fecha = `${partes.find((p) => p.type === "year").value}-${partes.find((p) => p.type === "month").value}-${partes.find((p) => p.type === "day").value}`;
     return fecha;
   };
 
+  const limpiarFormulario = (nuevoNumeroFactura) => {
+    setFactura({
+      numeroFactura: nuevoNumeroFactura,
+
+      nombre: "",
+      apellido: "",
+      identificacion: "",
+      telefono: "",
+
+      tituloAviso: "",
+      descripcion: "",
+
+      categorias: [],
+
+      cantidad: 1,
+
+      valor: "",
+
+      fechaPublicacion: "",
+
+      fechaRecibido: obtenerFechaColombiana(),
+
+      idCliente: null,
+    });
+  };
+  
   const validarFormulario = () => {
     if (!factura.nombre.trim()) return "El nombre es requerido";
     if (!factura.apellido.trim()) return "El apellido es requerido";
@@ -67,11 +92,15 @@ function FormularioFactura({ factura, setFactura }) {
     if (!factura.telefono.trim()) return "El teléfono es requerido";
     if (!factura.tituloAviso.trim()) return "El título del aviso es requerido";
     if (!factura.descripcion.trim()) return "La descripción es requerida";
-    if (factura.categorias.length === 0) return "Debe seleccionar al menos una categoría";
-    if (!factura.valor || parseFloat(factura.valor) <= 0) return "El valor debe ser mayor a 0";
-    if (!factura.cantidad || parseInt(factura.cantidad) <= 0) return "La cantidad debe ser mayor a 0";
-    if (!factura.fechaPublicacion) return "La fecha de publicación es requerida";
-    
+    if (factura.categorias.length === 0)
+      return "Debe seleccionar al menos una categoría";
+    if (!factura.valor || parseFloat(factura.valor) <= 0)
+      return "El valor debe ser mayor a 0";
+    if (!factura.cantidad || parseInt(factura.cantidad) <= 0)
+      return "La cantidad debe ser mayor a 0";
+    if (!factura.fechaPublicacion)
+      return "La fecha de publicación es requerida";
+
     return null;
   };
 
@@ -110,31 +139,23 @@ function FormularioFactura({ factura, setFactura }) {
       await crearFactura(datosFactura);
 
       // Mostrar mensaje de éxito
-      setMensaje("✓ Factura guardada exitosamente");
-
+      setMensaje(
+        `✓ Factura No. ${factura.numeroFactura} guardada exitosamente`,
+      );
+      const data = await cargarNumeroFactura();
       // Limpiar formulario después de 2 segundos
-      setTimeout(() => {
-        setFactura({
-          nombre: "",
-          apellido: "",
-          identificacion: "",
-          telefono: "",
-          tituloAviso: "",
-          descripcion: "",
-          categorias: [],
-          cantidad: 1,
-          valor: "",
-          fechaPublicacion: "",
-          fechaRecibido: obtenerFechaColombiana(),
-          idCliente: null,
-        });
+      setTimeout(async () => {
+        const data = await cargarNumeroFactura();
+
+        limpiarFormulario(data.numero_factura);
+
         setMensaje("");
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.error("Error al guardar factura:", error);
       setMensaje(
         error.response?.data?.mensaje ||
-        "Error al guardar la factura. Intenta de nuevo."
+          "Error al guardar la factura. Intenta de nuevo.",
       );
     } finally {
       setCargando(false);
@@ -224,7 +245,10 @@ function FormularioFactura({ factura, setFactura }) {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Categorías <span className="text-muted">(Selecciona una o más)</span></label>
+          <label className="form-label">
+            Categorías{" "}
+            <span className="text-muted">(Selecciona una o más)</span>
+          </label>
           <div className="border p-3 rounded bg-white">
             {CATEGORIAS.map((categoria) => (
               <div className="form-check mb-2" key={categoria}>
@@ -235,7 +259,10 @@ function FormularioFactura({ factura, setFactura }) {
                   checked={factura.categorias.includes(categoria)}
                   onChange={() => manejarCategorias(categoria)}
                 />
-                <label className="form-check-label" htmlFor={`categoria-${categoria}`}>
+                <label
+                  className="form-check-label"
+                  htmlFor={`categoria-${categoria}`}
+                >
                   {categoria}
                 </label>
               </div>
@@ -286,17 +313,21 @@ function FormularioFactura({ factura, setFactura }) {
           <label className="form-label">Fecha del recibido</label>
           <div className="p-3 bg-light rounded border">
             <strong>{formatearFecha(factura.fechaRecibido)}</strong>
-            <small className="d-block text-muted mt-1">Fecha del día actual - Hora local Colombia </small>
+            <small className="d-block text-muted mt-1">
+              Fecha del día actual - Hora local Colombia{" "}
+            </small>
           </div>
         </div>
 
         {mensaje && (
-          <div className={`alert ${mensaje.includes("Error") || mensaje.includes("debe") || mensaje.includes("es requerido") ? "alert-danger" : "alert-success"} mb-3`}>
+          <div
+            className={`alert ${mensaje.includes("Error") || mensaje.includes("debe") || mensaje.includes("es requerido") ? "alert-danger" : "alert-success"} mb-3`}
+          >
             {mensaje}
           </div>
         )}
 
-        <button 
+        <button
           className="btn btn-danger w-100"
           onClick={guardarFactura}
           disabled={cargando}
@@ -307,5 +338,4 @@ function FormularioFactura({ factura, setFactura }) {
     </div>
   );
 }
-
 export default FormularioFactura;

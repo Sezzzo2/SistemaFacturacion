@@ -14,3 +14,8 @@ export const obtenerFacturasPorCliente = async (idCliente) => {
   const response = await api.get(`/facturas/${idCliente}`);
   return response.data;
 };
+
+export const obtenerSiguienteNumeroFactura = async () => {
+  const response = await api.get("/facturas/siguiente-numero");
+  return response.data;
+};
