@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { obtenerSiguienteNumeroFactura } from "../../services/facturaService";
 
 function Facturas() {
-  // Función para obtener la fecha actual en zona horaria de Colombia
   const obtenerFechaColombiana = () => {
     const ahora = new Date();
     const formatter = new Intl.DateTimeFormat("en-CA", {
@@ -15,26 +14,7 @@ function Facturas() {
       day: "2-digit",
     });
     const partes = formatter.formatToParts(ahora);
-    const fecha = `${partes.find((p) => p.type === "year").value}-${partes.find((p) => p.type === "month").value}-${partes.find((p) => p.type === "day").value}`;
-    return fecha;
-  };
-
-  const limpiarFormulario = (numeroFactura) => {
-    setFactura({
-      numeroFactura,
-      nombre: "",
-      apellido: "",
-      identificacion: "",
-      telefono: "",
-      tituloAviso: "",
-      descripcion: "",
-      categorias: [],
-      cantidad: 1,
-      valor: "",
-      fechaPublicacion: "",
-      fechaRecibido: obtenerFechaColombiana(),
-      idCliente: null,
-    });
+    return `${partes.find((p) => p.type === "year").value}-${partes.find((p) => p.type === "month").value}-${partes.find((p) => p.type === "day").value}`;
   };
 
   const [factura, setFactura] = useState({
@@ -45,7 +25,7 @@ function Facturas() {
     telefono: "",
     tituloAviso: "",
     descripcion: "",
-    categorias: [],
+    categorias: [], // ← este es el que falla si no está
     cantidad: 1,
     valor: "",
     fechaPublicacion: "",
@@ -56,13 +36,8 @@ function Facturas() {
   const cargarNumeroFactura = async () => {
     try {
       const data = await obtenerSiguienteNumeroFactura();
-
-      setFactura((prev) => ({
-        ...prev,
-        numeroFactura: data.numero_factura,
-      }));
-
-      return data; // ← agregar esto
+      setFactura((prev) => ({ ...prev, numeroFactura: data.numero_factura }));
+      return data;
     } catch (error) {
       console.error("Error cargando número de factura", error);
     }
@@ -84,7 +59,6 @@ function Facturas() {
               cargarNumeroFactura={cargarNumeroFactura}
             />
           </div>
-
           <div className="col-lg-8 p-4">
             <VistaPreviaFactura factura={factura} />
           </div>

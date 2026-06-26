@@ -1,0 +1,296 @@
+/* ═══════════════════════════════════════
+   PÁGINA CLIENTES
+═══════════════════════════════════════ */
+
+.clientes-page {
+  padding: 30px;
+  max-width: 1500px;
+}
+
+/* ── Encabezado ── */
+.clientes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.clientes-titulo {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 2px;
+}
+
+.clientes-subtitulo {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
+
+.btn-agregar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.btn-agregar i {
+  font-size: 16px;
+}
+
+.btn-agregar:hover {
+  background: #e03131;
+}
+
+/* ── Búsqueda ── */
+.clientes-busqueda {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.clientes-busqueda-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.clientes-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 40px 0 38px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 13.5px;
+  color: #111;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.clientes-input:focus {
+  border-color: #1a1a1a;
+}
+
+.clientes-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.clientes-clear:hover {
+  color: #333;
+}
+
+/* ── Tabla ── */
+.clientes-tabla-wrapper {
+  background: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.clientes-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.clientes-tabla thead tr {
+  background: #f7f7f7;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.clientes-tabla th {
+  padding: 10px 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.clientes-tabla tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+
+.clientes-tabla tbody tr:last-child {
+  border-bottom: none;
+}
+
+.clientes-tabla tbody tr:hover {
+  background: #fafafa;
+}
+
+.clientes-tabla td {
+  padding: 11px 16px;
+  color: #333;
+  vertical-align: middle;
+}
+
+.clientes-td-id {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.clientes-td-nombre {
+  font-weight: 500;
+  color: #111;
+}
+
+.clientes-td-muted {
+  color: #777;
+}
+
+/* ── Badge estado ── */
+.clientes-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.clientes-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.clientes-badge-activo {
+  background: #edfaf3;
+  color: #1a7a45;
+}
+
+.clientes-badge-activo .clientes-badge-dot {
+  background: #22c55e;
+}
+
+.clientes-badge-inactivo {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.clientes-badge-inactivo .clientes-badge-dot {
+  background: #ef4444;
+}
+
+/* ── Botones de acción ── */
+.clientes-acciones {
+  display: flex;
+  gap: 6px;
+}
+
+.clientes-btn-accion {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  color: #555;
+}
+
+.clientes-btn-editar:hover {
+  background: #fff8e1;
+  border-color: #f59e0b;
+  color: #b45309;
+}
+
+.clientes-btn-eliminar:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+
+/* ── Empty state ── */
+.clientes-empty {
+  text-align: center;
+  padding: 48px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* ── Paginación ── */
+.clientes-paginacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.clientes-pag-info {
+  font-size: 12.5px;
+  color: #888;
+}
+
+.clientes-pag-botones {
+  display: flex;
+  gap: 4px;
+}
+
+.clientes-pag-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-size: 13px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.clientes-pag-btn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.clientes-pag-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.clientes-pag-activo {
+  background: #1a1a1a !important;
+  border-color: #1a1a1a !important;
+  color: #fff !important;
+}

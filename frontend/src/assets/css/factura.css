@@ -116,10 +116,6 @@
     white-space: nowrap;
 }
 
-/* ═══════════════════════════════════════════
-   RECIBO FÍSICO — LA REPÚBLICA
-   Reemplaza / añade a tu factura.css
-═══════════════════════════════════════════ */
 
 /* Contenedor principal */
 .recibo-wrapper {
@@ -218,6 +214,7 @@
   padding-right: 8px;
   padding-top: 2px;
   font-size: 11px;
+  align-self: center;
 }
 
 .recibo-campo-valor {
@@ -445,8 +442,8 @@
 /* ── DIRECCIÓN PIE ── */
 .recibo-direccion {
   border-top: 2px solid #111;
-  background: #111;
-  color: #fff;
+  background: #ffffff;
+  color: #000000;
   text-align: center;
   padding: 5px 10px;
   font-size: 11px;
@@ -483,5 +480,98 @@
     flex-direction: row-reverse;
     gap: 4px;
     width: auto;
+  }
+}
+/* ── CABECERA: 4 logos como en el recibo físico ── */
+.recibo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid #111;
+}
+
+/* Logo 1: Grupo Industrial Grafiks — izquierda, cuadrado */
+.logo1 {
+  width: 180px;
+  height: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Logo 2: Periódicos La República — centro, más ancho */
+.logo2 {
+  width: 100px;
+  height: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Logo 3: Código QR — derecha-centro, cuadrado */
+.logo3 {
+  width: 140px;
+  height: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Logo 4: "Cuida el medio ambiente" — extremo derecho, rotado */
+.logo4 {
+  width: 50px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transform: rotate(0deg); 
+  writing-mode: vertical-rl;
+}
+
+/* ── LAYOUT PÁGINA: formulario scrolleable, vista estática ── */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.col-lg-4 {
+  height: calc(100vh - 56px); /* 56px = altura del Navbar */
+  overflow-y: auto;
+}
+
+.col-lg-8 {
+  height: calc(100vh - 56px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.recibo-wrapper {
+  max-width: 150%;
+  width: 90%;
+  height: auto;
+  margin: 30px auto;
+}
+
+/* ── IMPRESIÓN: solo el recibo ── */
+@media print {
+  /* Ocultar todo */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Mostrar solo el recibo y sus hijos */
+  .recibo-wrapper,
+  .recibo-wrapper * {
+    visibility: visible;
+  }
+
+  /* Posicionar el recibo en la esquina */
+  .recibo-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    font-size: 13px; /* letra un poco más grande al imprimir */
   }
 }

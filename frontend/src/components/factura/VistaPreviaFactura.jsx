@@ -1,4 +1,8 @@
 import "../../assets/css/factura.css";
+import logofactura1 from "../../assets/images/logofactura1.png";
+import logofactura2 from "../../assets/images/logofactura2.png";
+import logofactura3 from "../../assets/images/logofactura3.png";
+import logofactura4 from "../../assets/images/logofactura4.png";
 
 const TODAS_CATEGORIAS = [
   "PRENSA",
@@ -15,11 +19,13 @@ const TODAS_CATEGORIAS = [
 function VistaPreviaFactura({ factura }) {
   const formatearFecha = (fecha) => {
     if (!fecha) return "---";
+
     const date = new Date(fecha + "T00:00:00");
+
     return date.toLocaleDateString("es-CO", {
+      day: "numeric",
+      month: "long",
       year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
     });
   };
 
@@ -31,31 +37,10 @@ function VistaPreviaFactura({ factura }) {
     <div className="recibo-wrapper">
       {/* ── CABECERA ── */}
       <div className="recibo-header">
-        {/* Columna izquierda: logo + datos empresa */}
-        <div className="recibo-header-left">
-          <img src="/logo.png" alt="Logo" className="recibo-logo" />
-          <div className="recibo-empresa-info">
-            <p className="recibo-nit">NIT: 17.336.537-8</p>
-            <p className="recibo-regimen">RÉGIMEN SIMPLIFICADO</p>
-          </div>
-        </div>
-
-        {/* Columna central: imagen periódicos (decorativa) */}
-        <div className="recibo-header-center">
-          <img
-            src="/periodicos.png"
-            alt="Periódicos"
-            className="recibo-periodicos"
-            onError={(e) => (e.target.style.display = "none")}
-          />
-        </div>
-
-        {/* Columna derecha: QR / número factura */}
-        <div className="recibo-header-right">
-          <p className="recibo-factura-num">
-            No. <strong>{factura.numeroFactura || "------"}</strong>
-          </p>
-        </div>
+        <img src={logofactura1} alt="" className="logo1" />
+        <img src={logofactura2} alt="" className="logo2" />
+        <img src={logofactura3} alt="" className="logo3" />
+        <img src={logofactura4} alt="" className="logo4" />
       </div>
 
       {/* ── CUERPO PRINCIPAL (dos columnas) ── */}

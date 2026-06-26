@@ -1,0 +1,141 @@
+/* ── NAVBAR OSCURO ── */
+.navbar-custom {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2e2e2e;
+  padding: 0 20px;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Marca */
+.navbar-brand-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  margin-right: 24px;
+  white-space: nowrap;
+}
+
+.navbar-brand-custom i {
+  font-size: 18px;
+  color: #e03131;
+}
+
+/* Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+}
+
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.navbar-link i {
+  font-size: 15px;
+}
+
+.navbar-link:hover {
+  background: #2a2a2a;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-link-active {
+  background: #2a2a2a;
+  color: #fff !important;
+  position: relative;
+}
+
+.navbar-link-active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #e03131;
+  border-radius: 2px 2px 0 0;
+}
+
+/* Usuario */
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.navbar-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e03131;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.navbar-username {
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.navbar-logout {
+  background: none;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  color: #888;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-size: 15px;
+  padding: 0;
+}
+
+.navbar-logout:hover {
+  background: #2a2a2a;
+  border-color: #555;
+  color: #fff;
+}
+
+/* Ajustar el calc del layout si usas height: 52px */
+.col-lg-4,
+.col-lg-8 {
+  height: calc(100vh - 52px);
+}
