@@ -25,9 +25,9 @@ function Sidebar() {
           Facturación
         </NavLink>
 
-        <NavLink to="/reportes" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+        <NavLink to="/historial-factura" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
           <i className="bi bi-bar-chart"></i>
-          Reportes
+          Historial de Facturas
         </NavLink>
       </div>
     </div>

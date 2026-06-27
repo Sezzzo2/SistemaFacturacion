@@ -4,24 +4,13 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Crear factura
-router.post("/", authMiddleware, facturaController.crearFactura);
-
-// Obtener siguiente número
-router.get(
-  "/siguiente-numero",
-  authMiddleware,
-  facturaController.obtenerSiguienteNumeroFactura,
-);
-
-// Obtener todas las facturas
-router.get("/", authMiddleware, facturaController.obtenerFacturas);
-
-// Obtener facturas por cliente
-router.get(
-  "/:idCliente",
-  authMiddleware,
-  facturaController.obtenerFacturasPorCliente,
-);
+router.post("/",                authMiddleware, facturaController.crearFactura);
+router.get("/siguiente-numero", authMiddleware, facturaController.obtenerSiguienteNumeroFactura);
+router.get("/",                 authMiddleware, facturaController.obtenerFacturas);
+router.get("/inactivas",        authMiddleware, facturaController.obtenerFacturasInactivas);
+router.put("/:id/desactivar",   authMiddleware, facturaController.desactivarFactura);
+router.put("/:id/activar",      authMiddleware, facturaController.activarFactura);
+router.put("/:id",              authMiddleware, facturaController.actualizarFactura);
+router.get("/:idCliente",       authMiddleware, facturaController.obtenerFacturasPorCliente);
 
 module.exports = router;

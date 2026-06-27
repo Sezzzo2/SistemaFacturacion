@@ -24,7 +24,7 @@ function BuscarCliente({ setFactura, factura }) {
 
   const buscar = async () => {
     const data = await buscarClienteFactura(texto);
-    setClientes(data);
+    setClientes(data.filter((c) => c.estado === true)); 
   };
 
   const limpiarCliente = () => {

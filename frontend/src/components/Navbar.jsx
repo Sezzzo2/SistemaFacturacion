@@ -33,27 +33,47 @@ function Navbar() {
       {/* Links */}
       <ul className="navbar-links">
         <li>
-          <NavLink to="/dashboard" className={({ isActive }) => `navbar-link ${isActive ? "navbar-link-active" : ""}`}>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "navbar-link-active" : ""}`
+            }
+          >
             <i className="bi bi-speedometer2"></i>
             Dashboard
           </NavLink>
         </li>
         <li>
-          <NavLink to="/clientes" className={({ isActive }) => `navbar-link ${isActive ? "navbar-link-active" : ""}`}>
+          <NavLink
+            to="/clientes"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "navbar-link-active" : ""}`
+            }
+          >
             <i className="bi bi-people"></i>
             Clientes
           </NavLink>
         </li>
         <li>
-          <NavLink to="/facturas" className={({ isActive }) => `navbar-link ${isActive ? "navbar-link-active" : ""}`}>
+          <NavLink
+            to="/facturas"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "navbar-link-active" : ""}`
+            }
+          >
             <i className="bi bi-receipt"></i>
             Facturación
           </NavLink>
         </li>
         <li>
-          <NavLink to="/reportes" className={({ isActive }) => `navbar-link ${isActive ? "navbar-link-active" : ""}`}>
+          <NavLink
+            to="/historial"
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? "navbar-link-active" : ""}`
+            }
+          >
             <i className="bi bi-bar-chart"></i>
-            Reportes
+            Historial facturas
           </NavLink>
         </li>
       </ul>
@@ -62,7 +82,11 @@ function Navbar() {
       <div className="navbar-user">
         <div className="navbar-avatar">{iniciales}</div>
         <span className="navbar-username">{nombreUsuario}</span>
-        <button className="navbar-logout" onClick={cerrarSesion} title="Cerrar sesión">
+        <button
+          className="navbar-logout"
+          onClick={cerrarSesion}
+          title="Cerrar sesión"
+        >
           <i className="bi bi-box-arrow-right"></i>
         </button>
       </div>

@@ -35,3 +35,8 @@ export const buscarClienteFactura = async (texto) => {
 
   return response.data;
 };
+
+export const activarCliente = async (id) => {
+  const response = await api.put(`/clientes/${id}`, { estado: true });
+  return response.data;
+};
