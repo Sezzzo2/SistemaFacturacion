@@ -93,7 +93,7 @@
 .efm-campo label {
   font-size: 12px;
   font-weight: 500;
-  color: #555;
+  color: #000000;
 }
 
 .efm-campo input,
@@ -146,8 +146,8 @@
 }
 
 .efm-cat-activa {
-  background: #1a1a1a;
-  border-color: #1a1a1a;
+  background: #e21b1b;
+  border-color: #db1313;
   color: #fff;
 }
 

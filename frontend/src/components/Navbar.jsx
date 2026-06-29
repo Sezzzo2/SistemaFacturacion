@@ -40,7 +40,7 @@ function Navbar() {
             }
           >
             <i className="bi bi-speedometer2"></i>
-            Dashboard
+            Inicio
           </NavLink>
         </li>
         <li>
