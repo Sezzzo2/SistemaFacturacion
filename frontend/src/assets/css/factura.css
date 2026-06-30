@@ -576,54 +576,55 @@ html, body {
     font-size: 13px; /* letra un poco más grande al imprimir */
   }
 }
-/* ── IMPRESIÓN: solo el recibo ── */
 @media print {
-  /* Eliminar los márgenes que el navegador agrega a la hoja */
-  @page {
-    size: letter;
-    margin: 0;
-  }
+  /* Ocultar todo excepto el recibo */
+  body * { visibility: hidden; }
 
-  html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  /* Quitar el padding/alturas fijas de los contenedores de Bootstrap */
-  .container-fluid,
-  .row,
-  .col-lg-4,
-  .col-lg-8 {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: auto !important;
-    overflow: visible !important;
-    display: block !important;
-  }
-
-  /* Ocultar todo */
-  body * {
-    visibility: hidden;
-  }
-
-  /* Mostrar solo el recibo y sus hijos */
+  .solo-impresion,
+  .solo-impresion *,
   .recibo-wrapper,
   .recibo-wrapper * {
-    visibility: visible;
+    visibility: visible !important;
   }
 
-  /* Posicionar el recibo pegado al borde físico de la hoja */
+  /* Configuración de página: media carta horizontal */
+  @page {
+    size: letter landscape;
+    margin: 8mm 10mm;
+  }
+
+  /* Posicionar el recibo */
   .recibo-wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    box-shadow: none;
-    border: none;
-    font-size: 13px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    font-size: 11px !important;
+    transform: none !important;
   }
+
+  /* Ajustar logos */
+  .logo1 { width: 70px !important; height: 70px !important; }
+  .logo2 { width: 90px !important; height: 80px !important; }
+  .logo3 { width: 80px !important; height: 80px !important; }
+  .logo4 { width: 24px !important; height: 80px !important; }
+
+  /* Altura de la fila de descripción más compacta */
+  .recibo-tr-main td { height: 60px !important; }
+
+  /* Columna lateral más angosta */
+  .recibo-lateral {
+    width: 140px !important;
+    min-width: 140px !important;
+  }
+
+  /* Textos más pequeños */
+  .recibo-cat-nombre { font-size: 9px !important; }
+  .recibo-emails p,
+  .recibo-telefonos p { font-size: 9px !important; }
+  .recibo-no-text { font-size: 13px !important; }
+  .recibo-direccion { font-size: 9px !important; padding: 3px 8px !important; }
 }
