@@ -111,7 +111,10 @@ function VistaPreviaFactura({ factura }) {
                 <td
                   colSpan={2}
                   className="recibo-td recibo-td-total-label"
-                ></td>
+                  style={{ textAlign: "right", fontWeight: "bold" }}
+                >
+                  TOTAL:
+                </td>
                 <td className="recibo-td recibo-td-total">
                   {factura.valor
                     ? `$${Number(factura.valor).toLocaleString("es-CO")}`
