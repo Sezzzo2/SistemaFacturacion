@@ -10,6 +10,7 @@ import ConfirmModal from "../../components/Confirmmodal";
 import VistaPreviaFactura from "../../components/factura/VistaPreviaFactura";
 import EditarFacturaModal from "./EditarFacturaModal";
 import "../../assets/css/historial.css";
+import html2pdf from "html2pdf.js";
 
 const FACTURAS_POR_PAGINA = 5;
 
@@ -141,9 +142,20 @@ const handleImprimir = (factura) => {
     fechaPublicacion: factura.fecha_publicacion?.split("T")[0] || "",
     fechaRecibido: factura.fecha_recibido?.split("T")[0] || "",
   });
+
   setTimeout(() => {
-    window.print();
-  }, 300);
+    const elemento = document.querySelector(".recibo-wrapper");
+    html2pdf()
+      .set({
+        margin: [5, 5, 5, 5],
+        filename: `factura${factura.numero_factura}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
+      })
+      .from(elemento)
+      .save();
+  }, 400);
 };
 
 const formatearFecha = (fecha) => {

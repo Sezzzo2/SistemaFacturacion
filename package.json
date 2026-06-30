@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "html2pdf.js": "^0.14.0",
     "react-to-print": "^3.3.0"
   }
 }

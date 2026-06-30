@@ -1,6 +1,7 @@
 import BuscarCliente from "./BuscarCliente";
 import { crearFactura } from "../../services/facturaService";
 import { useState } from "react";
+import html2pdf from "html2pdf.js";
 
 const CATEGORIAS = [
   "PRENSA",
@@ -169,13 +170,19 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
         `✓ Factura No. ${factura.numeroFactura} guardada. Abriendo impresión...`,
       );
 
-      const tituloOriginal = document.title;
-      document.title = `Factura${factura.numeroFactura}`;
-
       setTimeout(() => {
-        window.print();
-        document.title = tituloOriginal; 
-      }, 300);
+        const elemento = document.querySelector(".recibo-wrapper");
+        html2pdf()
+          .set({
+            margin: [5, 5, 5, 5],
+            filename: `factura${factura.numeroFactura}.pdf`,
+            image: { type: "jpeg", quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
+          })
+          .from(elemento)
+          .save();
+      }, 400);
 
       setTimeout(async () => {
         const data = await cargarNumeroFactura();
