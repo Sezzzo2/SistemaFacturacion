@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { buscarClienteFactura } from "../../services/clienteService";
-import CrearClienteModal from "../../pages/Clientes/CrearClienteModal";
+import CrearClienteModal from "../../pages/clientes/CrearClienteModal";
 
 function BuscarCliente({ setFactura, factura }) {
   const [texto, setTexto] = useState("");

@@ -6,7 +6,7 @@ import {
   desactivarFactura,
   activarFactura,
 } from "../../services/facturaService";
-import ConfirmModal from "../../components/ConfirmModal";
+import ConfirmModal from "../../components/Confirmmodal";
 import VistaPreviaFactura from "../../components/factura/VistaPreviaFactura";
 import EditarFacturaModal from "./EditarFacturaModal";
 import "../../assets/css/historial.css";
