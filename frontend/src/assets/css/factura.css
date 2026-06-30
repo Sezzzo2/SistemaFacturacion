@@ -546,9 +546,8 @@ html, body {
 }
 
 .recibo-wrapper {
-  max-width: 150%;
-  width: 90%;
-  height: auto;
+  width: 850px;
+  max-width: 850px;
   margin: 30px auto;
 }
 
@@ -575,4 +574,63 @@ html, body {
     border: none;
     font-size: 13px; /* letra un poco más grande al imprimir */
   }
+}
+
+/* =======================
+   CONFIGURACIÓN IMPRESIÓN
+   ======================= */
+
+@page {
+  size: Letter portrait;
+  margin: 10mm;
+}
+
+@media print {
+
+  html,
+  body {
+    width: 216mm;
+    height: 279mm;
+    overflow: visible !important;
+    background: white;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .recibo-wrapper,
+  .recibo-wrapper * {
+    visibility: visible;
+  }
+
+  .recibo-wrapper {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 190mm;
+    max-width: 190mm;
+
+    margin: 0 auto;
+    padding: 0;
+
+    border: none;
+    box-shadow: none;
+
+    transform: scale(1);
+
+    font-size: 11px;
+  }
+
+  .recibo-body{
+    display:flex;
+  }
+
+  .recibo-lateral{
+    width:170px;
+    min-width:170px;
+  }
+
 }
