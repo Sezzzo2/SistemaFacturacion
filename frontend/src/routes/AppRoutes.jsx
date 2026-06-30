@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "../pages/Login/Login";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import Login from "../pages/login/Login";
+import Dashboard from "../pages/dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
-import Clientes from "../pages/Clientes/Clientes";
-import Facturas from "../pages/Facturas/Facturas";
+import Clientes from "../pages/clientes/Clientes";
+import Facturas from "../pages/facturas/Facturas";
 import HistorialFacturas from "../pages/historial-factura/HistorialFacturas";
 
 function AppRoutes() {
