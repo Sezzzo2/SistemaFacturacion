@@ -78,16 +78,23 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
     if (!factura.telefono.trim()) return "El teléfono es requerido";
     if (!factura.tituloAviso.trim()) return "El título del aviso es requerido";
     if (!factura.descripcion.trim()) return "La descripción es requerida";
-    if (factura.categorias.length === 0) return "Debe seleccionar al menos una categoría";
-    if (!factura.valor || parseFloat(factura.valor) <= 0) return "El valor debe ser mayor a 0";
-    if (!factura.cantidad || parseInt(factura.cantidad) <= 0) return "La cantidad debe ser mayor a 0";
-    if (!factura.fechaPublicacion) return "La fecha de publicación es requerida";
+    if (factura.categorias.length === 0)
+      return "Debe seleccionar al menos una categoría";
+    if (!factura.valor || parseFloat(factura.valor) <= 0)
+      return "El valor debe ser mayor a 0";
+    if (!factura.cantidad || parseInt(factura.cantidad) <= 0)
+      return "La cantidad debe ser mayor a 0";
+    if (!factura.fechaPublicacion)
+      return "La fecha de publicación es requerida";
     return null;
   };
 
   const guardar = async () => {
     const error = validarFormulario();
-    if (error) { setMensaje(error); return; }
+    if (error) {
+      setMensaje(error);
+      return;
+    }
 
     setCargando(true);
     setMensaje("");
@@ -110,7 +117,9 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
       };
 
       await crearFactura(datosFactura);
-      setMensaje(`✓ Factura No. ${factura.numeroFactura} guardada exitosamente`);
+      setMensaje(
+        `✓ Factura No. ${factura.numeroFactura} guardada exitosamente`,
+      );
 
       setTimeout(async () => {
         const data = await cargarNumeroFactura();
@@ -119,7 +128,10 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
       }, 1500);
     } catch (error) {
       console.error("Error al guardar factura:", error);
-      setMensaje(error.response?.data?.mensaje || "Error al guardar la factura. Intenta de nuevo.");
+      setMensaje(
+        error.response?.data?.mensaje ||
+          "Error al guardar la factura. Intenta de nuevo.",
+      );
     } finally {
       setCargando(false);
     }
@@ -127,7 +139,10 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
 
   const guardarEImprimir = async () => {
     const error = validarFormulario();
-    if (error) { setMensaje(error); return; }
+    if (error) {
+      setMensaje(error);
+      return;
+    }
 
     setCargando(true);
     setMensaje("");
@@ -150,9 +165,17 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
       };
 
       await crearFactura(datosFactura);
-      setMensaje(`✓ Factura No. ${factura.numeroFactura} guardada. Abriendo impresión...`);
+      setMensaje(
+        `✓ Factura No. ${factura.numeroFactura} guardada. Abriendo impresión...`,
+      );
 
-      setTimeout(() => { window.print(); }, 300);
+      const tituloOriginal = document.title;
+      document.title = `Factura${factura.numeroFactura}`;
+
+      setTimeout(() => {
+        window.print();
+        document.title = tituloOriginal; 
+      }, 300);
 
       setTimeout(async () => {
         const data = await cargarNumeroFactura();
@@ -161,7 +184,10 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
       }, 1500);
     } catch (error) {
       console.error("Error al guardar factura:", error);
-      setMensaje(error.response?.data?.mensaje || "Error al guardar la factura. Intenta de nuevo.");
+      setMensaje(
+        error.response?.data?.mensaje ||
+          "Error al guardar la factura. Intenta de nuevo.",
+      );
     } finally {
       setCargando(false);
     }
@@ -181,38 +207,70 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
         <div className="row">
           <div className="col-md-6 mb-3">
             <label className="form-label">Nombre</label>
-            <input className="form-control" name="nombre" value={factura.nombre} onChange={cambiarValor} />
+            <input
+              className="form-control"
+              name="nombre"
+              value={factura.nombre}
+              onChange={cambiarValor}
+            />
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">Apellido</label>
-            <input className="form-control" name="apellido" value={factura.apellido} onChange={cambiarValor} />
+            <input
+              className="form-control"
+              name="apellido"
+              value={factura.apellido}
+              onChange={cambiarValor}
+            />
           </div>
         </div>
 
         <div className="row">
           <div className="col-md-6 mb-3">
             <label className="form-label">Identificación</label>
-            <input className="form-control" name="identificacion" value={factura.identificacion} onChange={cambiarValor} />
+            <input
+              className="form-control"
+              name="identificacion"
+              value={factura.identificacion}
+              onChange={cambiarValor}
+            />
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">Teléfono</label>
-            <input className="form-control" name="telefono" value={factura.telefono} onChange={cambiarValor} />
+            <input
+              className="form-control"
+              name="telefono"
+              value={factura.telefono}
+              onChange={cambiarValor}
+            />
           </div>
         </div>
 
         <div className="mb-3">
           <label className="form-label">Título del aviso</label>
-          <input className="form-control" name="tituloAviso" value={factura.tituloAviso} onChange={cambiarValor} />
+          <input
+            className="form-control"
+            name="tituloAviso"
+            value={factura.tituloAviso}
+            onChange={cambiarValor}
+          />
         </div>
 
         <div className="mb-3">
           <label className="form-label">Descripción</label>
-          <textarea rows="4" className="form-control" name="descripcion" value={factura.descripcion} onChange={cambiarValor} />
+          <textarea
+            rows="4"
+            className="form-control"
+            name="descripcion"
+            value={factura.descripcion}
+            onChange={cambiarValor}
+          />
         </div>
 
         <div className="mb-3">
           <label className="form-label">
-            Categorías <span className="text-muted">(Selecciona una o más)</span>
+            Categorías{" "}
+            <span className="text-muted">(Selecciona una o más)</span>
           </label>
           <div className="border p-3 rounded bg-white">
             {CATEGORIAS.map((categoria) => (
@@ -224,7 +282,10 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
                   checked={factura.categorias.includes(categoria)}
                   onChange={() => manejarCategorias(categoria)}
                 />
-                <label className="form-check-label" htmlFor={`categoria-${categoria}`}>
+                <label
+                  className="form-check-label"
+                  htmlFor={`categoria-${categoria}`}
+                >
                   {categoria}
                 </label>
               </div>
@@ -235,38 +296,69 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
         <div className="row">
           <div className="col-md-6 mb-3">
             <label className="form-label">Valor</label>
-            <input type="number" className="form-control" name="valor" value={factura.valor} onChange={cambiarValor} />
+            <input
+              type="number"
+              className="form-control"
+              name="valor"
+              value={factura.valor}
+              onChange={cambiarValor}
+            />
           </div>
           <div className="col-md-6 mb-3">
             <label className="form-label">Cantidad</label>
-            <input type="number" className="form-control" name="cantidad" value={factura.cantidad} onChange={cambiarValor} min="1" />
+            <input
+              type="number"
+              className="form-control"
+              name="cantidad"
+              value={factura.cantidad}
+              onChange={cambiarValor}
+              min="1"
+            />
           </div>
         </div>
 
         <div className="mb-3">
           <label className="form-label">Fecha de publicación</label>
-          <input type="date" className="form-control" name="fechaPublicacion" value={factura.fechaPublicacion} onChange={cambiarValor} />
+          <input
+            type="date"
+            className="form-control"
+            name="fechaPublicacion"
+            value={factura.fechaPublicacion}
+            onChange={cambiarValor}
+          />
         </div>
 
         <div className="mb-3">
           <label className="form-label">Fecha del recibido</label>
           <div className="p-3 bg-light rounded border">
             <strong>{formatearFecha(factura.fechaRecibido)}</strong>
-            <small className="d-block text-muted mt-1">Fecha del día actual - Hora local Colombia</small>
+            <small className="d-block text-muted mt-1">
+              Fecha del día actual - Hora local Colombia
+            </small>
           </div>
         </div>
 
         {mensaje && (
-          <div className={`alert ${mensaje.includes("Error") || mensaje.includes("debe") || mensaje.includes("requerido") ? "alert-danger" : "alert-success"} mb-3`}>
+          <div
+            className={`alert ${mensaje.includes("Error") || mensaje.includes("debe") || mensaje.includes("requerido") ? "alert-danger" : "alert-success"} mb-3`}
+          >
             {mensaje}
           </div>
         )}
 
         <div className="d-flex gap-2">
-          <button className="btn btn-outline-danger flex-fill" onClick={guardar} disabled={cargando}>
+          <button
+            className="btn btn-outline-danger flex-fill"
+            onClick={guardar}
+            disabled={cargando}
+          >
             {cargando ? "⏳ Guardando..." : "💾 Guardar"}
           </button>
-          <button className="btn btn-danger flex-fill" onClick={guardarEImprimir} disabled={cargando}>
+          <button
+            className="btn btn-danger flex-fill"
+            onClick={guardarEImprimir}
+            disabled={cargando}
+          >
             {cargando ? "⏳ Guardando..." : "🖨️ Guardar e imprimir"}
           </button>
         </div>
