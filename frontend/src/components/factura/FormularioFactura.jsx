@@ -173,10 +173,10 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
         const elemento = document.querySelector(".recibo-wrapper");
         html2pdf()
           .set({
-            margin: [5, 5, 5, 5],
+            margin: [3, 3, 3, 3],
             filename: `factura${factura.numeroFactura}.pdf`,
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
+            html2canvas: { scale: 1.5, useCORS: true, windowWidth: 900 },
             jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
           })
           .from(elemento)

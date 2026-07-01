@@ -44,19 +44,30 @@ function HistorialFacturas() {
     const texto = busqueda.toLowerCase();
     return (
       String(f.numero_factura).includes(texto) ||
-      `${f.cliente_nombre} ${f.cliente_apellido}`.toLowerCase().includes(texto) ||
+      `${f.cliente_nombre} ${f.cliente_apellido}`
+        .toLowerCase()
+        .includes(texto) ||
       f.cliente_identificacion?.toLowerCase().includes(texto) ||
       f.titulo_aviso?.toLowerCase().includes(texto)
     );
   });
 
-  const totalPaginas = Math.ceil(facturasFiltradas.length / FACTURAS_POR_PAGINA);
+  const totalPaginas = Math.ceil(
+    facturasFiltradas.length / FACTURAS_POR_PAGINA,
+  );
   const inicio = (paginaActual - 1) * FACTURAS_POR_PAGINA;
-  const facturasPagina = facturasFiltradas.slice(inicio, inicio + FACTURAS_POR_PAGINA);
+  const facturasPagina = facturasFiltradas.slice(
+    inicio,
+    inicio + FACTURAS_POR_PAGINA,
+  );
 
   const getPaginas = () => {
     const range = [];
-    for (let i = Math.max(1, paginaActual - 2); i <= Math.min(totalPaginas, paginaActual + 2); i++) {
+    for (
+      let i = Math.max(1, paginaActual - 2);
+      i <= Math.min(totalPaginas, paginaActual + 2);
+      i++
+    ) {
       range.push(i);
     }
     return range;
@@ -113,10 +124,10 @@ function HistorialFacturas() {
       const elemento = document.querySelector(".recibo-wrapper");
       html2pdf()
         .set({
-          margin: [5, 5, 5, 5],
+          margin: [3, 3, 3, 3],
           filename: `factura${factura.numero_factura}.pdf`,
           image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true },
+          html2canvas: { scale: 1.5, useCORS: true, windowWidth: 900 },
           jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
         })
         .from(elemento)
@@ -154,9 +165,14 @@ function HistorialFacturas() {
           <div className="historial-header-acciones">
             <button
               className={`btn-anuladas ${vistaInactivas ? "btn-vista-activo" : ""}`}
-              onClick={() => { setVistaInactivas((v) => !v); setBusqueda(""); }}
+              onClick={() => {
+                setVistaInactivas((v) => !v);
+                setBusqueda("");
+              }}
             >
-              <i className={`bi ${vistaInactivas ? "bi-receipt" : "bi-archive"}`}></i>
+              <i
+                className={`bi ${vistaInactivas ? "bi-receipt" : "bi-archive"}`}
+              ></i>
               {vistaInactivas ? "Ver activas" : "Facturas anuladas"}
             </button>
           </div>
@@ -168,7 +184,10 @@ function HistorialFacturas() {
             className="historial-input"
             placeholder="Buscar por N° factura, cliente, cédula o título..."
             value={busqueda}
-            onChange={(e) => { setBusqueda(e.target.value); setPaginaActual(1); }}
+            onChange={(e) => {
+              setBusqueda(e.target.value);
+              setPaginaActual(1);
+            }}
           />
           {busqueda && (
             <button className="historial-clear" onClick={() => setBusqueda("")}>
@@ -195,9 +214,15 @@ function HistorialFacturas() {
                 facturasPagina.map((f) => (
                   <tr key={f.id_factura}>
                     <td className="historial-td-numero">#{f.numero_factura}</td>
-                    <td className="historial-td-cliente">{f.cliente_nombre} {f.cliente_apellido}</td>
-                    <td className="historial-td-cedula">{f.cliente_identificacion}</td>
-                    <td className="historial-td-telefono">{f.cliente_telefono}</td>
+                    <td className="historial-td-cliente">
+                      {f.cliente_nombre} {f.cliente_apellido}
+                    </td>
+                    <td className="historial-td-cedula">
+                      {f.cliente_identificacion}
+                    </td>
+                    <td className="historial-td-telefono">
+                      {f.cliente_telefono}
+                    </td>
                     <td className="historial-td-titulo">{f.titulo_aviso}</td>
                     <td className="historial-td-valor">
                       ${Number(f.valor || 0).toLocaleString("es-CO")}
@@ -245,8 +270,18 @@ function HistorialFacturas() {
               ) : (
                 <tr>
                   <td colSpan="7" className="historial-empty">
-                    <i className="bi bi-receipt" style={{ fontSize: 32, display: "block", marginBottom: 8, opacity: 0.3 }}></i>
-                    {vistaInactivas ? "No hay facturas anuladas" : "No se encontraron facturas"}
+                    <i
+                      className="bi bi-receipt"
+                      style={{
+                        fontSize: 32,
+                        display: "block",
+                        marginBottom: 8,
+                        opacity: 0.3,
+                      }}
+                    ></i>
+                    {vistaInactivas
+                      ? "No hay facturas anuladas"
+                      : "No se encontraron facturas"}
                   </td>
                 </tr>
               )}
@@ -256,17 +291,31 @@ function HistorialFacturas() {
 
         {totalPaginas > 1 && (
           <div className="historial-paginacion">
-            <span className="historial-pag-info">Página {paginaActual} de {totalPaginas}</span>
+            <span className="historial-pag-info">
+              Página {paginaActual} de {totalPaginas}
+            </span>
             <div className="historial-pag-botones">
-              <button className="historial-pag-btn" disabled={paginaActual === 1} onClick={() => setPaginaActual((p) => p - 1)}>
+              <button
+                className="historial-pag-btn"
+                disabled={paginaActual === 1}
+                onClick={() => setPaginaActual((p) => p - 1)}
+              >
                 <i className="bi bi-chevron-left"></i>
               </button>
               {getPaginas().map((p) => (
-                <button key={p} className={`historial-pag-btn ${paginaActual === p ? "historial-pag-activo" : ""}`} onClick={() => setPaginaActual(p)}>
+                <button
+                  key={p}
+                  className={`historial-pag-btn ${paginaActual === p ? "historial-pag-activo" : ""}`}
+                  onClick={() => setPaginaActual(p)}
+                >
                   {p}
                 </button>
               ))}
-              <button className="historial-pag-btn" disabled={paginaActual === totalPaginas} onClick={() => setPaginaActual((p) => p + 1)}>
+              <button
+                className="historial-pag-btn"
+                disabled={paginaActual === totalPaginas}
+                onClick={() => setPaginaActual((p) => p + 1)}
+              >
                 <i className="bi bi-chevron-right"></i>
               </button>
             </div>
