@@ -37,8 +37,20 @@ const crearFactura = async (req, res) => {
     const nuevoNumeroFactura = resultadoSecuencia.rows[0].numero_factura;
 
     const factura = await facturaModel.crear({
-      numeroFactura: nuevoNumeroFactura, idCliente: clienteId, idEmpleado,
-      tituloAviso, descripcion, categorias, cantidad, valor, fechaPublicacion, fechaRecibido,
+      numeroFactura: nuevoNumeroFactura,
+      idCliente: clienteId,
+      idEmpleado,
+      nombre,
+      apellido,
+      identificacion: identificacionNormalizada,
+      telefono,
+      tituloAviso,
+      descripcion,
+      categorias,
+      cantidad,
+      valor,
+      fechaPublicacion,
+      fechaRecibido,
     });
 
     res.status(201).json({ mensaje: "Factura creada exitosamente", factura });
