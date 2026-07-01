@@ -20,20 +20,12 @@ const crearFactura = async (req, res) => {
 
     let clienteId = idCliente;
     if (!clienteId) {
-      const clienteExistente = await pool.query(
-        "SELECT id_cliente FROM cliente WHERE identificacion = $1 AND estado = true",
-        [identificacion]
+      const resultadoCliente = await pool.query(
+        `INSERT INTO cliente (identificacion, nombre, apellido, telefono, estado)
+         VALUES ($1, $2, $3, $4, true) RETURNING id_cliente`,
+        [identificacion, nombre, apellido, telefono]
       );
-      if (clienteExistente.rows.length > 0) {
-        clienteId = clienteExistente.rows[0].id_cliente;
-      } else {
-        const resultadoCliente = await pool.query(
-          `INSERT INTO cliente (identificacion, nombre, apellido, telefono, estado)
-           VALUES ($1, $2, $3, $4, true) RETURNING id_cliente`,
-          [identificacion, nombre, apellido, telefono]
-        );
-        clienteId = resultadoCliente.rows[0].id_cliente;
-      }
+      clienteId = resultadoCliente.rows[0].id_cliente;
     }
 
     const resultadoSecuencia = await pool.query(
