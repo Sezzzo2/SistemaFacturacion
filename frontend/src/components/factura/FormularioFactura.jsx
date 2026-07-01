@@ -176,7 +176,7 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
             margin: [3, 3, 3, 3],
             filename: `factura${factura.numeroFactura}.pdf`,
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 1.5, useCORS: true, windowWidth: 900 },
+            html2canvas: { scale: 1.5, useCORS: true, windowWidth: 1200 },
             jsPDF: { unit: "mm", format: "letter", orientation: "landscape" },
           })
           .from(elemento)
