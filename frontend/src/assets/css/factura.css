@@ -430,7 +430,7 @@ html, body {
     border: 1px solid #000 !important;
     font-size: 10px !important;
     transform: none !important;
-    margin: 0 !important;
+    margin: 10px auto; /* antes era 30px */
     box-sizing: border-box;
     overflow: hidden;
   }

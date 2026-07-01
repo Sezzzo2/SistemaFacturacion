@@ -172,19 +172,23 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
       setTimeout(() => {
         const elemento = document.querySelector(".recibo-wrapper");
 
-        // Forzar tamaño fijo antes de capturar
+        // Quitar margen temporalmente
+        const marginOriginal = elemento.style.margin;
+        elemento.style.margin = "0";
         elemento.style.width = "860px";
         elemento.style.maxWidth = "860px";
 
         html2pdf()
           .set({
             margin: 0,
-            filename: `factura${factura.numero_factura}.pdf`,
+            filename: `factura${factura.numero_factura}.pdf`, // ajusta según el archivo
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: {
-              scale: 1,
+              scale: 1.2,
               useCORS: true,
               windowWidth: 860,
+              x: 0,
+              y: 0,
             },
             jsPDF: {
               unit: "mm",
@@ -195,7 +199,7 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
           .from(elemento)
           .save()
           .then(() => {
-            // Restaurar estilos después de guardar
+            elemento.style.margin = marginOriginal;
             elemento.style.width = "";
             elemento.style.maxWidth = "";
           });
