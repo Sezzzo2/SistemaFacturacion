@@ -1,131 +1,78 @@
-.formulario-card{
-
-    border-radius:15px;
-
+.formulario-card {
+  border-radius: 15px;
 }
 
-.preview-card{
-
-    border-radius:15px;
-
-    background:white;
-
-    min-height:900px;
-
-    padding:40px;
-
+.preview-card {
+  border-radius: 15px;
+  background: white;
+  min-height: 900px;
+  padding: 40px;
 }
 
-.titulo-factura{
-
-    color:#b30000;
-
-    font-weight:bold;
-
+.titulo-factura {
+  color: #b30000;
+  font-weight: bold;
 }
 
-.logo-preview{
-
-    width:140px;
-
+.logo-preview {
+  width: 160px;
 }
 
-.linea{
-
-    border-bottom:1px solid #ddd;
-
-    margin-top:8px;
-
-    margin-bottom:8px;
-
+.linea {
+  border-bottom: 1px solid #ddd;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
-.categoria-box{
-
-    border:1px solid #ccc;
-
-    padding:5px;
-
-    margin-bottom:5px;
-
+.categoria-box {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
-.total-box{
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    color:#b30000;
-
-}
-.preview-card{
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:15px;
-
-    min-height:900px;
-
+.total-box {
+  font-size: 28px;
+  font-weight: bold;
+  color: #b30000;
 }
 
-.logo-preview{
-
-    width:160px;
-
+.table th {
+  background: #f8f9fa;
 }
 
-.titulo-factura{
-
-    color:#b30000;
-
-    font-weight:bold;
-
+.table td {
+  vertical-align: middle;
 }
 
-.table th{
-
-    background:#f8f9fa;
-
-}
-
-.table td{
-
-    vertical-align:middle;
-
-}
-
-/* Estilos para categorías múltiples */
 .categorias-preview {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .categoria-badge {
-    display: inline-block;
-    background-color: #b30000;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    white-space: nowrap;
+  display: inline-block;
+  background-color: #b30000;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
-
-/* Contenedor principal */
+/* ── RECIBO WRAPPER ── */
 .recibo-wrapper {
   font-family: "Arial Narrow", Arial, sans-serif;
   font-size: 12px;
   border: 1px solid #bbb;
   background: #fff;
   color: #111;
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: 150%;
+  width: 90%;
+  height: auto;
+  margin: 30px auto;
   padding: 0;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
@@ -135,51 +82,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px 6px;
+  padding: 10px;
   border-bottom: 2px solid #111;
-  gap: 8px;
 }
 
-.recibo-header-left {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 130px;
-}
-
-.recibo-logo {
-  height: 64px;
+.logo1 {
+  width: 180px;
+  height: 110px;
   object-fit: contain;
-  margin-bottom: 4px;
+  flex-shrink: 0;
 }
 
-.recibo-empresa-info p {
-  margin: 0;
-  font-size: 10px;
-  font-weight: bold;
-  line-height: 1.4;
-}
-
-.recibo-header-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.recibo-periodicos {
-  height: 80px;
+.logo2 {
+  width: 100px;
+  height: 110px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
-.recibo-header-right {
-  min-width: 110px;
-  text-align: right;
-  font-size: 11px;
+.logo3 {
+  width: 140px;
+  height: 110px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
-.recibo-factura-num {
-  margin: 0;
-  font-size: 11px;
+.logo4 {
+  width: 50px;
+  height: 120px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transform: rotate(0deg);
+  writing-mode: vertical-rl;
 }
 
 /* ── CUERPO ── */
@@ -188,7 +122,6 @@
   align-items: stretch;
 }
 
-/* Columna izquierda */
 .recibo-campos {
   flex: 1;
   padding: 8px 10px;
@@ -198,7 +131,6 @@
   gap: 0;
 }
 
-/* Filas etiqueta + valor */
 .recibo-fila {
   display: flex;
   align-items: flex-start;
@@ -251,7 +183,7 @@
   min-height: 22px;
 }
 
-/* ── TABLA Cant/Descripción/Valor ── */
+/* ── TABLA ── */
 .recibo-tabla {
   width: 100%;
   border-collapse: collapse;
@@ -267,16 +199,9 @@
   text-align: center;
 }
 
-.recibo-th-cant {
-  width: 46px;
-}
-.recibo-th-desc {
-  text-align: center;
-}
-.recibo-th-val {
-  width: 90px;
-  text-align: center;
-}
+.recibo-th-cant { width: 46px; }
+.recibo-th-desc { text-align: center; }
+.recibo-th-val  { width: 90px; text-align: center; }
 
 .recibo-tr-main td {
   height: 90px;
@@ -335,7 +260,7 @@
   text-align: right;
 }
 
-/* ── COLUMNA DERECHA: categorías ── */
+/* ── COLUMNA DERECHA ── */
 .recibo-lateral {
   width: 170px;
   min-width: 170px;
@@ -387,7 +312,6 @@
   color: #c00;
 }
 
-/* Caja "No" */
 .recibo-no-box {
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
@@ -402,7 +326,6 @@
   color: #c00;
 }
 
-/* Firma y sello */
 .recibo-firma-box {
   border-bottom: 1px solid #aaa;
   text-align: center;
@@ -423,7 +346,6 @@
   background: #fafafa;
 }
 
-/* Recibido */
 .recibo-recibido-box {
   padding: 5px 8px;
   font-size: 10px;
@@ -440,7 +362,7 @@
   color: #333;
 }
 
-/* ── DIRECCIÓN PIE ── */
+/* ── PIE DE PÁGINA ── */
 .recibo-direccion {
   border-top: 2px solid #111;
   background: #ffffff;
@@ -453,19 +375,85 @@
   text-transform: uppercase;
 }
 
-/* ── RESPONSIVE (impresión / pantallas pequeñas) ── */
-@media print {
-  .recibo-wrapper {
-    box-shadow: none;
-    border: none;
-    max-width: 100%;
-  }
+/* ── LAYOUT PÁGINA ── */
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
-@media (max-width: 640px) {
-  .recibo-body {
-    flex-direction: column;
+.col-lg-4 {
+  height: calc(100vh - 52px);
+  overflow-y: auto;
+}
+
+.col-lg-8 {
+  height: calc(100vh - 52px);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 !important;
+}
+
+/* ── IMPRESIÓN ── */
+.solo-impresion {
+  display: none !important;
+}
+
+@media print {
+  body * { visibility: hidden; }
+
+  .solo-impresion,
+  .solo-impresion *,
+  .recibo-wrapper,
+  .recibo-wrapper * {
+    visibility: visible !important;
   }
+
+  .solo-impresion {
+    display: block !important;
+  }
+
+  @page {
+    size: letter landscape;
+    margin: 8mm 10mm;
+  }
+
+  .recibo-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+    font-size: 11px !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .logo1 { width: 70px !important; height: 70px !important; }
+  .logo2 { width: 90px !important; height: 80px !important; }
+  .logo3 { width: 80px !important; height: 80px !important; }
+  .logo4 { width: 24px !important; height: 80px !important; }
+
+  .recibo-tr-main td { height: 60px !important; }
+
+  .recibo-lateral {
+    width: 140px !important;
+    min-width: 140px !important;
+  }
+
+  .recibo-cat-nombre { font-size: 9px !important; }
+  .recibo-emails p,
+  .recibo-telefonos p { font-size: 9px !important; }
+  .recibo-no-text { font-size: 13px !important; }
+  .recibo-direccion { font-size: 9px !important; padding: 3px 8px !important; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .recibo-body { flex-direction: column; }
   .recibo-lateral {
     width: 100%;
     min-width: unset;
@@ -482,149 +470,4 @@
     gap: 4px;
     width: auto;
   }
-}
-/* ── CABECERA: 4 logos como en el recibo físico ── */
-.recibo-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 2px solid #111;
-}
-
-/* Logo 1: Grupo Industrial Grafiks — izquierda, cuadrado */
-.logo1 {
-  width: 180px;
-  height: 110px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Logo 2: Periódicos La República — centro, más ancho */
-.logo2 {
-  width: 100px;
-  height: 110px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Logo 3: Código QR — derecha-centro, cuadrado */
-.logo3 {
-  width: 140px;
-  height: 110px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* Logo 4: "Cuida el medio ambiente" — extremo derecho, rotado */
-.logo4 {
-  width: 50px;
-  height: 120px;
-  object-fit: contain;
-  flex-shrink: 0;
-  transform: rotate(0deg); 
-  writing-mode: vertical-rl;
-}
-
-/* ── LAYOUT PÁGINA: formulario scrolleable, vista estática ── */
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
-
-.col-lg-4 {
-  height: calc(100vh - 56px); /* 56px = altura del Navbar */
-  overflow-y: auto;
-}
-
-.col-lg-8 {
-  height: calc(100vh - 56px);
-  overflow: hidden;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
-.recibo-wrapper {
-  max-width: 150%;
-  width: 90%;
-  height: auto;
-  margin: 30px auto;
-}
-
-/* ── IMPRESIÓN: solo el recibo ── */
-@media print {
-  /* Ocultar todo */
-  body * {
-    visibility: hidden;
-  }
-
-  /* Mostrar solo el recibo y sus hijos */
-  .recibo-wrapper,
-  .recibo-wrapper * {
-    visibility: visible;
-  }
-
-  /* Posicionar el recibo en la esquina */
-  .recibo-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-shadow: none;
-    border: none;
-    font-size: 13px; /* letra un poco más grande al imprimir */
-  }
-}
-@media print {
-  /* Ocultar todo excepto el recibo */
-  body * { visibility: hidden; }
-
-  .solo-impresion,
-  .solo-impresion *,
-  .recibo-wrapper,
-  .recibo-wrapper * {
-    visibility: visible !important;
-  }
-
-  /* Configuración de página: media carta horizontal */
-  @page {
-    size: letter landscape;
-    margin: 8mm 10mm;
-  }
-
-  /* Posicionar el recibo */
-  .recibo-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-shadow: none !important;
-    border: 1px solid #000 !important;
-    font-size: 11px !important;
-    transform: none !important;
-  }
-
-  /* Ajustar logos */
-  .logo1 { width: 70px !important; height: 70px !important; }
-  .logo2 { width: 90px !important; height: 80px !important; }
-  .logo3 { width: 80px !important; height: 80px !important; }
-  .logo4 { width: 24px !important; height: 80px !important; }
-
-  /* Altura de la fila de descripción más compacta */
-  .recibo-tr-main td { height: 60px !important; }
-
-  /* Columna lateral más angosta */
-  .recibo-lateral {
-    width: 140px !important;
-    min-width: 140px !important;
-  }
-
-  /* Textos más pequeños */
-  .recibo-cat-nombre { font-size: 9px !important; }
-  .recibo-emails p,
-  .recibo-telefonos p { font-size: 9px !important; }
-  .recibo-no-text { font-size: 13px !important; }
-  .recibo-direccion { font-size: 9px !important; padding: 3px 8px !important; }
 }
