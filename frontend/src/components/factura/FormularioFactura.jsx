@@ -174,7 +174,7 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
         html2pdf()
           .set({
             margin: [3, 3, 3, 3],
-            filename: `factura${factura.numeroFactura}.pdf`, // o factura.numero_factura en historial
+            filename: `factura${factura.numerofactura}.pdf`, // o factura.numero_factura en historial
             image: { type: "jpeg", quality: 0.98 },
             html2canvas: { scale: 2, useCORS: true, windowWidth: 860 },
             jsPDF: {

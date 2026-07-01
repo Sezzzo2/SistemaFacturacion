@@ -124,15 +124,23 @@ function HistorialFacturas() {
       const elemento = document.querySelector(".recibo-wrapper");
       html2pdf()
         .set({
-          margin: [3, 3, 3, 3],
-          filename: `factura${factura.numeroFactura}.pdf`, // o factura.numero_factura en historial
+          margin: [0, 0, 0, 0],
+          filename: `factura${factura.numero_factura}.pdf`,
           image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2, useCORS: true, windowWidth: 860 },
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            windowWidth: 900,
+            scrollX: 0,
+            scrollY: 0,
+            logging: false,
+          },
           jsPDF: {
             unit: "mm",
-            format: [216, 140], // ← media carta: 216mm ancho x 140mm alto
+            format: [216, 140],
             orientation: "landscape",
           },
+          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
         })
         .from(elemento)
         .save();

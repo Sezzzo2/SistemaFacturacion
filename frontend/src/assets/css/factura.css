@@ -415,8 +415,8 @@ html, body {
   }
 
   @page {
-    size: letter landscape;
-    margin: 8mm 10mm;
+    size: 216mm 140mm landscape;
+    margin: 2mm;
   }
 
   .recibo-wrapper {
@@ -425,30 +425,42 @@ html, body {
     left: 0;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
     box-shadow: none !important;
     border: 1px solid #000 !important;
-    font-size: 11px !important;
+    font-size: 10px !important;
     transform: none !important;
     margin: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
-  .logo1 { width: 70px !important; height: 70px !important; }
-  .logo2 { width: 90px !important; height: 80px !important; }
-  .logo3 { width: 80px !important; height: 80px !important; }
-  .logo4 { width: 24px !important; height: 80px !important; }
+  .recibo-header { padding: 6px 8px !important; }
+  .logo1 { width: 88px !important; height: 54px !important; }
+  .logo2 { width: 58px !important; height: 54px !important; }
+  .logo3 { width: 70px !important; height: 54px !important; }
+  .logo4 { width: 18px !important; height: 54px !important; }
 
-  .recibo-tr-main td { height: 60px !important; }
+  .recibo-campos { padding: 6px 8px !important; }
+  .recibo-fila { min-height: 20px !important; padding: 2px 0 !important; }
+  .recibo-etiqueta { font-size: 9px !important; min-width: 76px !important; }
+  .recibo-campo-valor { font-size: 9px !important; }
+  .recibo-th { padding: 2px 4px !important; font-size: 9px !important; }
+  .recibo-td { padding: 2px 4px !important; font-size: 9px !important; }
+  .recibo-tr-main td { height: 44px !important; }
 
   .recibo-lateral {
-    width: 140px !important;
-    min-width: 140px !important;
+    width: 120px !important;
+    min-width: 120px !important;
   }
 
-  .recibo-cat-nombre { font-size: 9px !important; }
+  .recibo-cat-fila { font-size: 8px !important; }
+  .recibo-cat-nombre { font-size: 8px !important; }
   .recibo-emails p,
-  .recibo-telefonos p { font-size: 9px !important; }
-  .recibo-no-text { font-size: 13px !important; }
-  .recibo-direccion { font-size: 9px !important; padding: 3px 8px !important; }
+  .recibo-telefonos p { font-size: 8px !important; }
+  .recibo-no-text { font-size: 12px !important; }
+  .recibo-firma-espacio { height: 24px !important; }
+  .recibo-direccion { font-size: 8px !important; padding: 3px 8px !important; }
 }
 
 /* ── RESPONSIVE ── */
