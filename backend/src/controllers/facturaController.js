@@ -126,7 +126,7 @@ const activarFactura = async (req, res) => {
 const obtenerSiguienteNumeroFactura = async (req, res) => {
   try {
     const resultado = await pool.query(
-      `SELECT COALESCE(MAX(numero_factura), 45000) + 1 AS numero_factura FROM factura`
+      `SELECT last_value + 1 AS numero_factura FROM factura_numero_factura_seq`
     );
     res.json(resultado.rows[0]);
   } catch (error) {
