@@ -137,13 +137,13 @@ function HistorialFacturas() {
           html2canvas: {
             scale: 1.2,
             useCORS: true,
-            windowWidth: 860,
+            windowWidth: 1100, // ← sube de 860 a 1100
             x: 0,
             y: 0,
           },
           jsPDF: {
             unit: "mm",
-            format: [216, 140],
+            format: [240, 145], // ← un poco más ancho
             orientation: "landscape",
           },
         })
