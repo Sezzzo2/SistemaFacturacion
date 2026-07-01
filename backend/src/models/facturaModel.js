@@ -25,9 +25,16 @@ const crear = async (facturaData) => {
   `;
 
   const values = [
-    numeroFactura, idCliente, idEmpleado,
-    tituloAviso, descripcion, JSON.stringify(categorias),
-    cantidad || 1, valor, fechaPublicacion, fechaRecibido,
+    numeroFactura,
+    idCliente,
+    idEmpleado,
+    tituloAviso,
+    descripcion,
+    JSON.stringify(categorias),
+    cantidad || 1,
+    valor,
+    fechaPublicacion,
+    fechaRecibido,
   ];
 
   const result = await pool.query(query, values);
@@ -105,24 +112,49 @@ const obtenerFacturasPorCliente = async (idCliente) => {
 
 const actualizarFactura = async (id, datos) => {
   const {
-    nombre, apellido, identificacion, telefono,
-    tituloAviso, descripcion, categorias,
-    cantidad, valor, fechaPublicacion,
+    nombre,
+    apellido,
+    identificacion,
+    telefono,
+    tituloAviso,
+    descripcion,
+    categorias,
+    cantidad,
+    valor,
+    fechaPublicacion,
   } = datos;
 
-  // Actualizar cliente si cambió
-  await pool.query(
-    `UPDATE cliente SET nombre=$1, apellido=$2, identificacion=$3, telefono=$4
-     WHERE id_cliente = (SELECT id_cliente FROM factura WHERE id_factura=$5)`,
-    [nombre, apellido, identificacion, telefono, id]
+  // Verificar cuántas facturas tiene ese cliente
+  const conteo = await pool.query(
+    `SELECT COUNT(*) FROM factura 
+     WHERE id_cliente = (SELECT id_cliente FROM factura WHERE id_factura = $1)
+     AND estado = true`,
+    [id],
   );
+
+  // Solo actualizar el cliente si esta es su única factura
+  if (parseInt(conteo.rows[0].count) <= 1) {
+    await pool.query(
+      `UPDATE cliente SET nombre=$1, apellido=$2, identificacion=$3, telefono=$4
+       WHERE id_cliente = (SELECT id_cliente FROM factura WHERE id_factura=$5)`,
+      [nombre, apellido, identificacion, telefono, id],
+    );
+  }
 
   const result = await pool.query(
     `UPDATE factura SET
       titulo_aviso=$1, descripcion=$2, categoria_aviso=$3,
       cantidad=$4, valor=$5, fecha_publicacion=$6
      WHERE id_factura=$7 RETURNING *`,
-    [tituloAviso, descripcion, JSON.stringify(categorias), cantidad, valor, fechaPublicacion, id]
+    [
+      tituloAviso,
+      descripcion,
+      JSON.stringify(categorias),
+      cantidad,
+      valor,
+      fechaPublicacion,
+      id,
+    ],
   );
   return result.rows[0];
 };
@@ -130,7 +162,7 @@ const actualizarFactura = async (id, datos) => {
 const desactivarFactura = async (id) => {
   const result = await pool.query(
     "UPDATE factura SET estado = false WHERE id_factura = $1 RETURNING *",
-    [id]
+    [id],
   );
   return result.rows[0];
 };
@@ -138,7 +170,7 @@ const desactivarFactura = async (id) => {
 const activarFactura = async (id) => {
   const result = await pool.query(
     "UPDATE factura SET estado = true WHERE id_factura = $1 RETURNING *",
-    [id]
+    [id],
   );
   return result.rows[0];
 };
