@@ -87,7 +87,7 @@
 }
 
 .logo1 {
-  width: 180px;
+  width: 100px;  /* antes 180px */
   height: 110px;
   object-fit: contain;
   flex-shrink: 0;
