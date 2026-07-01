@@ -483,3 +483,7 @@ html, body {
     width: auto;
   }
 }
+
+@media print {
+  .solo-impresion { display: none !important; }
+}

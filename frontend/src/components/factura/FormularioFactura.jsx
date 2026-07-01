@@ -171,20 +171,34 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
 
       setTimeout(() => {
         const elemento = document.querySelector(".recibo-wrapper");
+
+        // Forzar tamaño fijo antes de capturar
+        elemento.style.width = "860px";
+        elemento.style.maxWidth = "860px";
+
         html2pdf()
           .set({
-            margin: [3, 3, 3, 3],
-            filename: `factura${factura.numerofactura}.pdf`, // o factura.numero_factura en historial
+            margin: 0,
+            filename: `factura${factura.numero_factura}.pdf`,
             image: { type: "jpeg", quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, windowWidth: 860 },
+            html2canvas: {
+              scale: 1,
+              useCORS: true,
+              windowWidth: 860,
+            },
             jsPDF: {
               unit: "mm",
-              format: [216, 140], // ← media carta: 216mm ancho x 140mm alto
+              format: [216, 140],
               orientation: "landscape",
             },
           })
           .from(elemento)
-          .save();
+          .save()
+          .then(() => {
+            // Restaurar estilos después de guardar
+            elemento.style.width = "";
+            elemento.style.maxWidth = "";
+          });
       }, 400);
 
       setTimeout(async () => {

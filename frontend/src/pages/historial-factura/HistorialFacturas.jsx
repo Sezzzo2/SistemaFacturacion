@@ -122,28 +122,34 @@ function HistorialFacturas() {
 
     setTimeout(() => {
       const elemento = document.querySelector(".recibo-wrapper");
+
+      // Forzar tamaño fijo antes de capturar
+      elemento.style.width = "860px";
+      elemento.style.maxWidth = "860px";
+
       html2pdf()
         .set({
-          margin: [0, 0, 0, 0],
+          margin: 0,
           filename: `factura${factura.numero_factura}.pdf`,
           image: { type: "jpeg", quality: 0.98 },
           html2canvas: {
-            scale: 2,
+            scale: 1,
             useCORS: true,
-            windowWidth: 900,
-            scrollX: 0,
-            scrollY: 0,
-            logging: false,
+            windowWidth: 860,
           },
           jsPDF: {
             unit: "mm",
             format: [216, 140],
             orientation: "landscape",
           },
-          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
         })
         .from(elemento)
-        .save();
+        .save()
+        .then(() => {
+          // Restaurar estilos después de guardar
+          elemento.style.width = "";
+          elemento.style.maxWidth = "";
+        });
     }, 400);
   };
 
