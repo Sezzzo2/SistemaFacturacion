@@ -5,10 +5,6 @@ const crear = async (facturaData) => {
     numeroFactura,
     idCliente,
     idEmpleado,
-    nombre,
-    apellido,
-    identificacion,
-    telefono,
     tituloAviso,
     descripcion,
     categorias,
@@ -21,11 +17,10 @@ const crear = async (facturaData) => {
   const query = `
     INSERT INTO factura (
       numero_factura, id_cliente, id_empleado,
-      nombre, apellido, identificacion, telefono,
       titulo_aviso, descripcion, categoria_aviso,
       cantidad, valor, fecha_publicacion, fecha_recibido, estado
     )
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, true)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, true)
     RETURNING *
   `;
 
@@ -33,10 +28,6 @@ const crear = async (facturaData) => {
     numeroFactura,
     idCliente,
     idEmpleado,
-    nombre,
-    apellido,
-    identificacion,
-    telefono,
     tituloAviso,
     descripcion,
     JSON.stringify(categorias),
