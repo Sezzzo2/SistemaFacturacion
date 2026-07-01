@@ -1,5 +1,6 @@
 const pool = require("../config/db");
 const facturaModel = require("../models/facturaModel");
+const { normalizarIdentificacion } = require("../utils/identificacion");
 
 const crearFactura = async (req, res) => {
   try {
@@ -18,12 +19,14 @@ const crearFactura = async (req, res) => {
       return res.status(400).json({ mensaje: "Faltan campos requeridos o las categorías están vacías" });
     }
 
+    const identificacionNormalizada = normalizarIdentificacion(identificacion);
+
     let clienteId = idCliente;
     if (!clienteId) {
       const resultadoCliente = await pool.query(
         `INSERT INTO cliente (identificacion, nombre, apellido, telefono, estado)
          VALUES ($1, $2, $3, $4, true) RETURNING id_cliente`,
-        [identificacion, nombre, apellido, telefono]
+        [identificacionNormalizada, nombre, apellido, telefono]
       );
       clienteId = resultadoCliente.rows[0].id_cliente;
     }

@@ -75,7 +75,6 @@ function FormularioFactura({ factura, setFactura, cargarNumeroFactura }) {
   const validarFormulario = () => {
     if (!factura.nombre.trim()) return "El nombre es requerido";
     if (!factura.apellido.trim()) return "El apellido es requerido";
-    if (!factura.identificacion.trim()) return "La identificación es requerida";
     if (!factura.telefono.trim()) return "El teléfono es requerido";
     if (!factura.tituloAviso.trim()) return "El título del aviso es requerido";
     if (!factura.descripcion.trim()) return "La descripción es requerida";

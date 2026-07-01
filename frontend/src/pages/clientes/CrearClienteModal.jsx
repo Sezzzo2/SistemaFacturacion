@@ -72,7 +72,7 @@ function CrearClienteModal({ mostrar, onClose, onCrear }) {
 
               <div className="mb-3">
                 <label htmlFor="identificacion" className="form-label">
-                  Identificación
+                  Identificación <span className="text-muted">(opcional)</span>
                 </label>
                 <input
                   type="text"
@@ -81,7 +81,6 @@ function CrearClienteModal({ mostrar, onClose, onCrear }) {
                   name="identificacion"
                   value={formData.identificacion}
                   onChange={handleChange}
-                  required
                 />
               </div>
 

@@ -1,4 +1,5 @@
 const pool = require("../config/db");
+const { normalizarIdentificacion } = require("../utils/identificacion");
 
 const listar = async (req, res) => {
   try {
@@ -62,8 +63,9 @@ const buscar = async (req, res) => {
 const crear = async (req, res) => {
   try {
     const { identificacion, nombre, apellido, telefono } = req.body;
+    const identificacionNormalizada = normalizarIdentificacion(identificacion);
 
-    if (!identificacion || !nombre || !apellido || !telefono) {
+    if (!nombre || !apellido || !telefono) {
       return res.status(400).json({
         mensaje: "Todos los campos son obligatorios",
       });
@@ -75,7 +77,7 @@ const crear = async (req, res) => {
             VALUES ($1, $2, $3, $4, true)
             RETURNING *
             `,
-      [identificacion, nombre, apellido, telefono],
+      [identificacionNormalizada, nombre, apellido, telefono],
     );
 
     res.status(201).json({
@@ -101,6 +103,7 @@ const actualizar = async (req, res) => {
   try {
     const { id } = req.params;
     const { identificacion, nombre, apellido, telefono, estado } = req.body;
+    const identificacionNormalizada = normalizarIdentificacion(identificacion);
 
     const resultado = await pool.query(
       `
@@ -114,7 +117,7 @@ const actualizar = async (req, res) => {
             WHERE id_cliente = $6
             RETURNING *
             `,
-      [identificacion, nombre, apellido, telefono, estado, id],
+      [identificacionNormalizada, nombre, apellido, telefono, estado, id],
     );
 
     if (resultado.rows.length === 0) {
